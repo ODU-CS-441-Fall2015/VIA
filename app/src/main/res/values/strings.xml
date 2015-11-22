@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">VIAGlass</string>
     <string name="title_activity_data_display">dataDisplay</string>
+    <string name="button_retrieve">Retrieve Data</string>
+    <string name="button_retriever">Retriever</string>
+    <string name="Title">Title</string>
 </resources>
