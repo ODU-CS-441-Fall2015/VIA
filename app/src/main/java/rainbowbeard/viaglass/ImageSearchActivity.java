@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import rainbowbeard.viaglass.tasks.ImageSearchTask;
+
 public class ImageSearchActivity extends AppCompatActivity {
     private static final String TAG = ImageSearchActivity.class.getCanonicalName();
-    public static final String SEARCH_RESPONSE_EVENT = "IMAGE_SEARCH_RESPONSE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +27,24 @@ public class ImageSearchActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG, "received " + SEARCH_RESPONSE_EVENT + " broadcast");
+                Log.d(TAG, "received " + ImageSearchTask.IMG_SEARCH_RESPONSE + " broadcast");
 
                 // extract the text from the response event and display it
-                final String response = intent.getStringExtra(SEARCH_RESPONSE_EVENT);
+                final String response = intent.getStringExtra(ImageSearchTask.IMG_SEARCH_RESPONSE);
                 if(null != response) {
                     final TextView resultView = (TextView) findViewById(R.id.result_view);
                     resultView.setText(response);
                 }
             }
-        }, new IntentFilter(SEARCH_RESPONSE_EVENT));
-        Log.d(TAG, "registered broadcast receiver for " + SEARCH_RESPONSE_EVENT);
+        }, new IntentFilter(ImageSearchTask.IMG_SEARCH_RESPONSE));
+        Log.d(TAG, "registered broadcast receiver for " + ImageSearchTask.IMG_SEARCH_RESPONSE);
     }
 
     public void onRetrieveClick(final View v) {
         Log.d(TAG, "retrieve clicked");
+
+        // TODO: use response from FileServer once we sort out the network blockage
+        // hardcode image filename for now
         final String imageFile = "uploads/upload-1.jpg";
         new ImageSearchTask(this, imageFile).start();
         final Toast toast = Toast.makeText(this, "Searching for image: " + imageFile, Toast.LENGTH_SHORT);
