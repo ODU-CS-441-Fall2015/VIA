@@ -14,6 +14,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void onCameraClick(View v) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
     public void onRetrieverClick(View view) {
         Intent intent = new Intent(this, ImageSearchActivity.class);
         startActivity(intent);

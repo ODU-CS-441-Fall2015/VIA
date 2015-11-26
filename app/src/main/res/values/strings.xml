@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">VIAGlass</string>
-    <string name="title_activity_data_display">dataDisplay</string>
-    <string name="button_retrieve">Retrieve Data</string>
-    <string name="button_retriever">Retriever</string>
+    <string name="button_retrieve">Search</string>
     <string name="Title">Title</string>
     <string name="default_img_search_result">Image Search results will be displayed here</string>
+    <string name="button_camera_str">Camera</string>
+    <string name="button_retriever_str">Image Search</string>
+    <string name="button_snapshot">Take Photo</string>
 </resources>

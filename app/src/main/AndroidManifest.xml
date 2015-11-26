@@ -3,7 +3,9 @@
     package="rainbowbeard.viaglass">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -18,9 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataDisplay"></activity>
-        <activity android:name=".ImageSearchActivity"></activity>
+        <activity android:name=".DataDisplay" />
+        <activity android:name=".ImageSearchActivity" />
+        <activity android:name=".CameraActivity" />
     </application>
-
 
 </manifest>
