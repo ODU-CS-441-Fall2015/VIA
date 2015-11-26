@@ -30,7 +30,7 @@ public class CameraActivity extends Activity {
         }
     }
 
-    public void onCameraClicked(View v) {
+    public void onCameraCaptureClick(View v) {
 
     }
 }
