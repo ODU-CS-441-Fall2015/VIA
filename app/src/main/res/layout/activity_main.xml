@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <Button
         android:onClick="onCameraClick"
@@ -21,5 +22,11 @@
         android:text="@string/button_retriever_str"
         android:id="@+id/button_retriever"
         android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_camera"
+        android:layout_weight="0.82" />
 
 </LinearLayout>

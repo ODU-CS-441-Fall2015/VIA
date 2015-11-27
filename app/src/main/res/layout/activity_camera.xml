@@ -15,7 +15,7 @@
             android:id="@+id/button_retriever"
             android:layout_gravity="center_horizontal|bottom" />
         <ImageView
-            android:id="@+id/image_camera"
+            android:id="@+id/i"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </FrameLayout>
