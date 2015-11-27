@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".DataDisplay" />
         <activity android:name=".ImageSearchActivity" />
-        <activity android:name=".CameraActivity" />
     </application>
 
 </manifest>
