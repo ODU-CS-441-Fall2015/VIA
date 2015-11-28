@@ -1,4 +1,4 @@
-package rainbowbeard.viaglass.datastore;
+package rainbowbeard.viaglass.data;
 
 import java.util.concurrent.ConcurrentHashMap;
 

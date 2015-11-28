@@ -12,7 +12,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import rainbowbeard.viaglass.data.ImageResponse;
+import rainbowbeard.viaglass.data.Upload;
 import rainbowbeard.viaglass.tasks.ImageSearchTask;
+import rainbowbeard.viaglass.tasks.UploadService;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ImageSearchActivity extends AppCompatActivity {
     private static final String TAG = ImageSearchActivity.class.getCanonicalName();
@@ -37,17 +48,50 @@ public class ImageSearchActivity extends AppCompatActivity {
                 }
             }
         }, new IntentFilter(ImageSearchTask.IMG_SEARCH_RESPONSE));
+
         Log.d(TAG, "registered broadcast receiver for " + ImageSearchTask.IMG_SEARCH_RESPONSE);
     }
 
-    public void onRetrieveClick(final View v) {
+    public void onImageClick(final View v) {
         Log.d(TAG, "retrieve clicked");
+        final Upload upload = new Upload();
+        upload.title = "lincoln.jpg";
+        upload.description = "some dude";
+        upload.image = resToFile(R.raw.lincoln, upload.title);
+        new UploadService(this).Execute(upload, new Callback<ImageResponse>() {
+            @Override
+            public void success(ImageResponse imageResponse, Response response) {
+                Toast.makeText(ImageSearchActivity.this, "Upload succeeded, performing Image Search", Toast.LENGTH_SHORT).show();
+                // successful upload, start reverse image search
+                new ImageSearchTask(ImageSearchActivity.this, imageResponse.data.link).start();
+            }
 
-        // TODO: use response from FileServer once we sort out the network blockage
-        // hardcode image filename for now
-        final String imageFile = "uploads/upload-1.jpg";
-        new ImageSearchTask(this, imageFile).start();
-        final Toast toast = Toast.makeText(this, "Searching for image: " + imageFile, Toast.LENGTH_SHORT);
-        toast.show();
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(ImageSearchActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private File resToFile(int resourceID, String filename) {
+        File file = getApplicationContext().getFileStreamPath(filename);
+        if(file.exists()) {
+            return file;
+        }
+
+        InputStream is;
+        FileOutputStream fos;
+        try {
+            is = getResources().openRawResource(resourceID);
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            fos = openFileOutput(filename, MODE_PRIVATE);
+            fos.write(buffer);
+            fos.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }

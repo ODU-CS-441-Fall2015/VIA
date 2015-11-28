@@ -1,6 +1,7 @@
 package rainbowbeard.viaglass.tasks;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,9 +21,21 @@ public abstract class SearchTask extends Thread {
     protected Context context;
     protected String queryParam;
 
-    public SearchTask(final Context context, final String queryParam) {
+    private final String URL_HEAD, URL_TAIL;
+
+    /**
+     * Constructor for a search task. The encodeURL method will wrap the encoded query param with
+     * the urlHead and urlTail parameters.
+     * @param context the calling context
+     * @param queryParam the query parameter
+     * @param urlHead the first portion of the encoded query url
+     * @param urlTail the last portion of the encoded query url
+     */
+    public SearchTask(final Context context, final String queryParam, final String urlHead, final String urlTail) {
         this.context = context;
         this.queryParam = queryParam;
+        this.URL_HEAD = urlHead;
+        this.URL_TAIL = urlTail;
     }
 
     @Override
@@ -52,7 +65,15 @@ public abstract class SearchTask extends Thread {
         parseResponse(response);
     }
 
-    public abstract void parseResponse(Response response);
+    private String encodeURL(final String queryParam) {
+        return URL_HEAD + Uri.encode(queryParam) + URL_TAIL;
+    }
 
-    protected abstract String encodeURL(final String queryParam);
+    /**
+     * Abstract method for parsing the response for this search task
+     *
+     * @param response
+     */
+    protected abstract void parseResponse(final Response response);
+
 }

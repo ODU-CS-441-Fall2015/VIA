@@ -17,12 +17,11 @@
         android:layout_gravity="center_horizontal"/>
 
     <Button
-        android:onClick="onRetrieveClick"
+        android:onClick="onImageClick"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/button_retrieve"
-        android:id="@+id/button_retrieve"
+        android:text="@string/button_image_str"
+        android:id="@+id/button_image"
         android:layout_gravity="center_horizontal" />
-
 
 </LinearLayout>

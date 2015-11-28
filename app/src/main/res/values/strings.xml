@@ -1,9 +1,16 @@
 <resources>
     <string name="app_name">VIAGlass</string>
-    <string name="button_retrieve">Search</string>
+    <string name="title_activity_data_display">dataDisplay</string>
+    <string name="button_image_str">Image Search</string>
+    <string name="button_wiki_str">Wiki Search</string>
+    <string name="button_retriever">Retriever</string>
     <string name="Title">Title</string>
     <string name="default_img_search_result">Image Search results will be displayed here</string>
     <string name="button_camera_str">Camera</string>
     <string name="button_retriever_str">Image Search</string>
     <string name="button_snapshot">Take Photo</string>
+    <string name="notification_fail">Image failed to upload...</string>
+    <string name="notification_share_link">Share link</string>
+    <string name="notifaction_success">Successfully uploaded</string>
+    <string name="notification_progress">Uploading image...</string>
 </resources>

@@ -2,7 +2,6 @@ package rainbowbeard.viaglass.tasks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -44,16 +43,11 @@ public class ImageSearchTask extends SearchTask {
 
     private static final String
             TAG = ImageSearchTask.class.getCanonicalName(),
-            URL_HEAD = "https://images.google.com/searchbyimage?image_url=http%3A%2F%2Fwww.cs.odu.edu%2F%7Emchaney%2F",
+            URL_HEAD = "https://images.google.com/searchbyimage?image_url=",
             URL_TAIL = "&image_content=&filename=&hl=en";
 
-    public ImageSearchTask(Context context, String imageFile) {
-        super(context, imageFile);
-    }
-
-    @Override
-    protected String encodeURL(final String filename) {
-        return URL_HEAD + Uri.encode(filename) + URL_TAIL;
+    public ImageSearchTask(Context context, String imageURL) {
+        super(context, imageURL, URL_HEAD, URL_TAIL);
     }
 
     @Override
