@@ -54,14 +54,16 @@ public class ImageSearchActivity extends AppCompatActivity {
 
     public void onImageClick(final View v) {
         Log.d(TAG, "retrieve clicked");
+
         final Upload upload = new Upload();
         upload.title = "lincoln.jpg";
         upload.description = "some dude";
         upload.image = resToFile(R.raw.lincoln, upload.title);
+
         new UploadService(this).Execute(upload, new Callback<ImageResponse>() {
             @Override
             public void success(ImageResponse imageResponse, Response response) {
-                Toast.makeText(ImageSearchActivity.this, "Upload succeeded, performing Image Search", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImageSearchActivity.this, "Performing Image Search", Toast.LENGTH_SHORT).show();
                 // successful upload, start reverse image search
                 new ImageSearchTask(ImageSearchActivity.this, imageResponse.data.link).start();
             }

@@ -32,8 +32,8 @@ public class WikiSearchTask extends SearchTask {
             e.printStackTrace();
         }
         String json = document.select("body").text();
-
+        System.out.println(json);
         // broadcast results
-    
+
     }
 }
