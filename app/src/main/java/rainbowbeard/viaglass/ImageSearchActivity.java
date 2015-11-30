@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -50,6 +51,11 @@ public class ImageSearchActivity extends AppCompatActivity {
                     final TextView resultView = (TextView) findViewById(R.id.result_view);
                     // set the text in the TextView to the first item in the WikiResponse names list
                     resultView.setText(wikiResponse.names.get(0));
+
+                    Intent displayIntent = new Intent(ImageSearchActivity.this, DataDisplay.class);
+                    displayIntent.putExtra("response key", response);
+                    startActivity(displayIntent);
+                    finish();
                 }
             }
         }, new IntentFilter(WikiSearchTask.WIKI_SEARCH_RESPONSE));
@@ -61,9 +67,9 @@ public class ImageSearchActivity extends AppCompatActivity {
 
         // create new UploadService with our picture file stored in the Upload object
         final Upload upload = new Upload();
-        upload.title = "lincoln.jpg";
+        upload.title = "Image.jpg";
         upload.description = "some dude";
-        upload.image = resToFile(R.raw.lincoln, upload.title);
+        upload.image = resToFile(R.id.target_picture, upload.title);
 
         new UploadService(this).Execute(upload, new Callback<ImageResponse>() {
             @Override

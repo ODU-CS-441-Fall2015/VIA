@@ -15,4 +15,5 @@ package rainbowbeard.viaglass;
      Send address => Information extractor
  */
 public class LocaleDataRetrieval {
+
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="camera_view" type="id">camera_view</item>
+    <item name="target_picture" type="id">target_image</item>
 </resources>

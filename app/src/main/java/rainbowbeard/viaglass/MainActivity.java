@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             try{
                 bitmap = MediaStore.Images.Media.getBitmap(cr,selectedImage);
                 imageView.setImageBitmap(bitmap);
+                imageView.setId(R.id.target_picture);
             }catch(Exception e){
                 Log.e("Image retrieve fail:", e.toString());
             }
