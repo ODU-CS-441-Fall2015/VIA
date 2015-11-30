@@ -2,6 +2,7 @@ package rainbowbeard.viaglass.tasks;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

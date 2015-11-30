@@ -52,7 +52,7 @@ public class ImageSearchActivity extends AppCompatActivity {
                     // set the text in the TextView to the first item in the WikiResponse names list
                     resultView.setText(wikiResponse.names.get(0));
 
-                    Intent displayIntent = new Intent(ImageSearchActivity.this, DataDisplay.class);
+                    Intent displayIntent = new Intent(context, DataDisplay.class);
                     displayIntent.putExtra("response key", response);
                     startActivity(displayIntent);
                     finish();
@@ -68,7 +68,7 @@ public class ImageSearchActivity extends AppCompatActivity {
         // create new UploadService with our picture file stored in the Upload object
         final Upload upload = new Upload();
         upload.title = "Image.jpg";
-        upload.description = "some dude";
+        upload.description = "test image";
         upload.image = resToFile(R.id.target_picture, upload.title);
 
         new UploadService(this).Execute(upload, new Callback<ImageResponse>() {
