@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 /**
  * Abstract base class for a JSoup search task.
@@ -58,11 +61,20 @@ public abstract class SearchTask extends Thread {
             Toast toast = Toast.makeText(context, "bad query param", Toast.LENGTH_SHORT);
             toast.show();
         }
+
         if(null == response || response.statusCode() != 200) {
             Log.e(TAG, "error in response" + (null != response ? ", status code: " + response.statusCode() : ""));
             return;
         }
-        parseResponse(response);
+
+        Document document = null;
+        try {
+            document = response.parse();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        parseResponse(document);
     }
 
     private String encodeURL(final String queryParam) {
@@ -70,10 +82,10 @@ public abstract class SearchTask extends Thread {
     }
 
     /**
-     * Abstract method for parsing the response for this search task
+     * Handles the response of the request
      *
-     * @param response
+     * @param document the {@link Document} object resulting from the executed Jsoup request
      */
-    protected abstract void parseResponse(final Response response);
+    protected abstract void parseResponse(final Document document);
 
 }

@@ -3,8 +3,8 @@ package rainbowbeard.viaglass;
 /**
  * Created by Bliss on 11/10/2015.
  Wiki retriever: (class)
- Receive name
- Search for name
+ Receive queryParam
+ Search for queryParam
  Filter for whitelist domains
  If no
  Send no data available

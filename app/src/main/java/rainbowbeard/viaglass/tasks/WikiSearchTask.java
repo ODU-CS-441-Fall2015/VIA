@@ -1,11 +1,18 @@
 package rainbowbeard.viaglass.tasks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 
-import org.jsoup.Connection.Response;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import rainbowbeard.viaglass.data.ResponseStore;
+import rainbowbeard.viaglass.data.WikiResponse;
 
 /**
  * Performs a wikipedia search of the query param.
@@ -24,16 +31,42 @@ public class WikiSearchTask extends SearchTask {
     }
 
     @Override
-    public void parseResponse(Response response) {
-        Document document = null;
+    public void parseResponse(final Document document) {
+        final String json = document.select("body").text();
+
+        // store json in ResponseStore and broadcast result to rest of app
+        final WikiResponse wikiResponse = new WikiResponse();
         try {
-            document = response.parse();
-        } catch (IOException e) {
+            final JSONArray items = new JSONArray(json);
+            final JSONArray names = items.getJSONArray(1);
+            final JSONArray descriptions = items.getJSONArray(2);
+            final JSONArray links = items.getJSONArray(3);
+            wikiResponse.queryParam = queryParam;
+            wikiResponse.names = getJSONList(names);
+            wikiResponse.descriptions = getJSONList(descriptions);
+            wikiResponse.links = getJSONList(links);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        String json = document.select("body").text();
-        System.out.println(json);
-        // broadcast results
 
+        // add our WikiResponse to the ResponseStore
+        ResponseStore.getInstance().put(queryParam, wikiResponse);
+
+        // broadcast our new WikiResponse to the rest of the app
+        final Intent resultIntent = new Intent(WIKI_SEARCH_RESPONSE);
+        resultIntent.putExtra(WIKI_SEARCH_RESPONSE, queryParam);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(resultIntent);
+    }
+
+    private static List<String> getJSONList(final JSONArray array) {
+        final List<String> results = new ArrayList<String>();
+        try {
+            for(int i=0; i<array.length(); i++) {
+                results.add(array.getString(i).toString());
+            }
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
 }

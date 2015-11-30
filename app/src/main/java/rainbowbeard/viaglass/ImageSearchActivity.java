@@ -18,9 +18,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import rainbowbeard.viaglass.data.ImageResponse;
+import rainbowbeard.viaglass.data.ResponseStore;
 import rainbowbeard.viaglass.data.Upload;
+import rainbowbeard.viaglass.data.WikiResponse;
 import rainbowbeard.viaglass.tasks.ImageSearchTask;
 import rainbowbeard.viaglass.tasks.UploadService;
+import rainbowbeard.viaglass.tasks.WikiSearchTask;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -29,7 +32,7 @@ public class ImageSearchActivity extends AppCompatActivity {
     private static final String TAG = ImageSearchActivity.class.getCanonicalName();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         Log.d(TAG, "created activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagesearch);
@@ -38,23 +41,25 @@ public class ImageSearchActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG, "received " + ImageSearchTask.IMG_SEARCH_RESPONSE + " broadcast");
+                Log.d(TAG, "received " + WikiSearchTask.WIKI_SEARCH_RESPONSE + " broadcast");
 
-                // extract the text from the response event and display it
-                final String response = intent.getStringExtra(ImageSearchTask.IMG_SEARCH_RESPONSE);
-                if(null != response) {
+                // extract the queryParam from the response event and use it to get the WikiResponse
+                final String response = intent.getStringExtra(WikiSearchTask.WIKI_SEARCH_RESPONSE);
+                if (null != response) {
+                    final WikiResponse wikiResponse = ResponseStore.getInstance().get(response);
                     final TextView resultView = (TextView) findViewById(R.id.result_view);
-                    resultView.setText(response);
+                    // set the text in the TextView to the first item in the WikiResponse names list
+                    resultView.setText(wikiResponse.names.get(0));
                 }
             }
-        }, new IntentFilter(ImageSearchTask.IMG_SEARCH_RESPONSE));
-
-        Log.d(TAG, "registered broadcast receiver for " + ImageSearchTask.IMG_SEARCH_RESPONSE);
+        }, new IntentFilter(WikiSearchTask.WIKI_SEARCH_RESPONSE));
+        Log.d(TAG, "registered broadcast receiver for " + WikiSearchTask.WIKI_SEARCH_RESPONSE);
     }
 
     public void onImageClick(final View v) {
         Log.d(TAG, "retrieve clicked");
 
+        // create new UploadService with our picture file stored in the Upload object
         final Upload upload = new Upload();
         upload.title = "lincoln.jpg";
         upload.description = "some dude";
@@ -75,8 +80,14 @@ public class ImageSearchActivity extends AppCompatActivity {
         });
     }
 
-    private File resToFile(int resourceID, String filename) {
-        File file = getApplicationContext().getFileStreamPath(filename);
+    /**
+     * Converts a resourceId + filename pair to a {@link File} object
+     * @param resourceID
+     * @param filename
+     * @return
+     */
+    private File resToFile(final int resourceID, final String filename) {
+        final File file = getApplicationContext().getFileStreamPath(filename);
         if(file.exists()) {
             return file;
         }

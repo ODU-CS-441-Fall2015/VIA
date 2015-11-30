@@ -39,7 +39,7 @@ public class ImageResponse {
           ", favorite=" + favorite +
           ", account_url='" + account_url + '\'' +
           ", deletehash='" + deletehash + '\'' +
-          ", name='" + name + '\'' +
+          ", queryParam='" + name + '\'' +
           ", link='" + link + '\'' +
           '}';
     }
