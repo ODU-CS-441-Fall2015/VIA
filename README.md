@@ -26,6 +26,8 @@ On Blackboard, under "Term Project Assignment“ submenu on the left panel you w
 5. Application apk: submit the compiled working .apk file of your application.
 
 
+Edit web page in gh-pages branch
+
 Web page should contain the following sections: 
 
   • A Description section that describes the usage and targeted audience/customers of your project 
