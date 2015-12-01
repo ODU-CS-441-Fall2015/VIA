@@ -9,7 +9,12 @@ Brent Connolly
 
 Submission Date: Mon Dec. 7th
 
-On Blackboard, under "Term Project Assignment“ submenu on the left panel you will find 5 new submission entries and corresponding submission instructions for: 1. Final Presentation Slides: submit the final version of the project slides you presented. 2. Project Webpage: submit zip file of all resources of the created webpage for your project (see next slide). 3. Webpage Link: submit a link of a working online version of your webpage 4. Application Workspace: submit a zip file of Android workspace of your application (all resource files of your application) 5. Application apk: submit the compiled working .apk file of your application.
+On Blackboard, under "Term Project Assignment“ submenu on the left panel you will find 5 new submission entries and corresponding submission instructions for:
+1. Final Presentation Slides: submit the final version of the project slides you presented. 
+2. Project Webpage: submit zip file of all resources of the created webpage for your project (see next slide). 
+3. Webpage Link: submit a link of a working online version of your webpage 
+4. Application Workspace: submit a zip file of Android workspace of your application (all resource files of your application) 
+5. Application apk: submit the compiled working .apk file of your application.
 
 Web page should contain the following sections: 
   • A Description section that describes the usage and targeted audience/customers of your project 
