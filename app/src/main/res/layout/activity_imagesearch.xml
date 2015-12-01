@@ -8,8 +8,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width= "wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text="title/name goes here"
+        android:gravity="center_horizontal"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+
 
     <TextView
+        android:layout_width= "wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/summary"
+        android:layout_marginTop = "25dp"
+        android:textSize="15dp"
+        android:layout_centerHorizontal="true"
+        android:text="summary of the image contents. first paragraph of wikipedia. "
+        android:layout_below="@+id/title"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Take another Image"
+        android:onClick="onButtonClick"/>
+   <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result_view"
@@ -22,6 +49,6 @@
         android:layout_height="wrap_content"
         android:text="@string/button_image_str"
         android:id="@+id/button_image"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal" />-->
 
 </LinearLayout>
