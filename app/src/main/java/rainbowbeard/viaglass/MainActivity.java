@@ -52,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if(resultCode == Activity.RESULT_OK) {
-            File photo = new File(Environment.getExternalStoragePublicDirectory
-                    (Environment.DIRECTORY_PICTURES), "picture.bmp");
-            final Uri selectedImage = Uri.fromFile(photo);
+            final Uri selectedImage = imageUri;
             getContentResolver().notifyChange(selectedImage,null);
 
             final ImageView imageView = (ImageView)findViewById(R.id.image_camera);
