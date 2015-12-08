@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VIAGlass.iml" filepath="$PROJECT_DIR$/VIAGlass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VIA.iml" filepath="$PROJECT_DIR$/VIA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
